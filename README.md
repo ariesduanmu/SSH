@@ -1,2 +1,9 @@
 # SSH
-A python ssh tool
+Paramiko based SSH tool
+
+# TODO
+Server
+Client
+Interactive
+Port-forwarding
+
