@@ -1,7 +1,7 @@
 # SSH
 Paramiko based SSH tool
 
-~~*TODO*~~
+*TODO*
 - [] Server
 - [] Client
 - [] Interactive
