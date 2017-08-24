@@ -2,8 +2,8 @@
 Paramiko based SSH tool
 
 *TODO*
-- [] Server
-- [] Client
-- [] Interactive
-- [] Port-forwarding
+- [ ] Server
+- [ ] Client
+- [ ] Interactive
+- [ ] Port-forwarding
 
