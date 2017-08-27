@@ -3,18 +3,14 @@ import sys
 import getopt
 import os
 import socket
+import argparse
 
 paramiko.util.log_to_file('client.log')
 
-key_filename = ''
-username = password = ""
-host = ""
-port = 22
 
-
-
-def ssh_client():
+def ssh_client(username, host, port, keyfile, password):
 	
+	'''
 	try:
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sock.connect((host,port))
@@ -85,11 +81,11 @@ def ssh_client():
 	try:
 		client = paramiko.SSHClient()
 		client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-		if len(key_filename) == 0:
+		if keyfile == None or len(keyfile) == 0:
 			client.connect(host,port,username,password)
 		else:
-			key = paramiko.RSAKey.from_private_key_file(key_filename)
-			client.connect(host,port,username,pkey = key_filename)
+			key = paramiko.RSAKey.from_private_key_file(keyfile)
+			client.connect(host,port,username,pkey = keyfile)
 		ssh_session = client.get_transport().open_session()
 		if ssh_session.active:
 		    ssh_session.send('ClientConnected')
@@ -98,46 +94,33 @@ def ssh_client():
 	except Exception as e:
 		print str(e)
 		sys.exit(1)
-	'''
-	
-def usage():
-    print "SSH Paramiko based SSH tool @Ludisposed & @Qin"
-    print ""
-    print "Usage: client.py username@host"
-    print ""
-    print "Optionals"
-    print "-p --port                 - port use to connect, default is 22"
-    print "-i                        - server pub key's filename"
-    print ""
-    print "Examples: "
-    print "python2.7 client.py username@host"
-    print "python2.7 client.py username@host -p port"
-    print "python2.7 client.py username@host -p port -i filename"
+
+def parse_options():
+    parser = argparse.ArgumentParser(usage='%(prog)s <username>[@<host>] [-p port] [-i pubkey_path]',
+                                     description='SSH is Paramiko based SSH tool @Ludisposed & @Qin',
+                                     formatter_class=argparse.RawDescriptionHelpFormatter,
+                                     epilog=
+'''
+Examples:
+python2.7 client.py username@host
+python2.7 client.py username@host -p port
+python2.7 client.py username@host -p port -i filename
+
+'''
+                                     )
+    parser.add_argument('-i', dest='keyfile', type=str, help="server pub key's filename")
+    parser.add_argument('-p','--port', type=int, default=22, help='port use to connect, default is 22')
+    parser.add_argument('username_host',type=str,help='server username and host')
+    args = parser.parse_args()
+
+    return args	
 
 if __name__ == "__main__":
-    if not len(sys.argv[1]):
-        usage()
-    else:
-        try:
-            username, host = sys.argv[1].split('@')
-        except Exception as e:
-            print str(e)
-            usage()
-    if len(sys.argv[2:]) > 0:
-        try:
-            ops, args = getopt.getopt(sys.argv[2:], "p:i:", ["port="])
-        except getopt.GetoptError as err:
-            print str(err)
-            usage()
+	args = parse_options()
+	username, host = args.username_host.split('@')
+	password = ''
+	if args.keyfile == None:
+		password = raw_input('Password: ')
+	ssh_client(username, host, args.port, args.keyfile, password)
 
-        for o,a in ops:
-            if o in ('-p','--port'):
-                port = int(a)
-            elif o in ('-i'):
-            	filename = a
-    
-    if len(filename) == 0:
-    	password = raw_input('Password: ')
-    
-    ssh_client() 
     

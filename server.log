@@ -138,3 +138,48 @@ DEB [20170824-19:32:24.798] thr=1   paramiko.transport: Compression agreed: none
 DEB [20170824-19:32:24.845] thr=1   paramiko.transport: kex engine KexNistp256 specified hash_algo <built-in function openssl_sha256>
 DEB [20170824-19:32:24.847] thr=1   paramiko.transport: Switch to new keys ...
 DEB [20170824-19:32:24.953] thr=1   paramiko.transport: EOF in transport thread
+DEB [20170827-17:25:00.446] thr=1   paramiko.transport: starting thread (server mode): 0x2f66a50L
+DEB [20170827-17:25:00.447] thr=1   paramiko.transport: Local version/idstring: SSH-2.0-paramiko_2.2.1
+DEB [20170827-17:25:00.448] thr=1   paramiko.transport: Remote version/idstring: SSH-2.0-paramiko_2.2.1
+INF [20170827-17:25:00.448] thr=1   paramiko.transport: Connected (version 2.0, client paramiko_2.2.1)
+DEB [20170827-17:25:00.450] thr=1   paramiko.transport: kex algos:[u'ecdh-sha2-nistp256', u'ecdh-sha2-nistp384', u'ecdh-sha2-nistp521', u'diffie-hellman-group-exchange-sha256', u'diffie-hellman-group-exchange-sha1', u'diffie-hellman-group14-sha1', u'diffie-hellman-group1-sha1'] server key:[u'ssh-ed25519', u'ecdsa-sha2-nistp256', u'ecdsa-sha2-nistp384', u'ecdsa-sha2-nistp521', u'ssh-rsa', u'ssh-dss'] client encrypt:[u'aes128-ctr', u'aes192-ctr', u'aes256-ctr', u'aes128-cbc', u'aes192-cbc', u'aes256-cbc', u'blowfish-cbc', u'3des-cbc'] server encrypt:[u'aes128-ctr', u'aes192-ctr', u'aes256-ctr', u'aes128-cbc', u'aes192-cbc', u'aes256-cbc', u'blowfish-cbc', u'3des-cbc'] client mac:[u'hmac-sha2-256', u'hmac-sha2-512', u'hmac-sha1', u'hmac-md5', u'hmac-sha1-96', u'hmac-md5-96'] server mac:[u'hmac-sha2-256', u'hmac-sha2-512', u'hmac-sha1', u'hmac-md5', u'hmac-sha1-96', u'hmac-md5-96'] client compress:[u'none'] server compress:[u'none'] client lang:[u''] server lang:[u''] kex follows?False
+DEB [20170827-17:25:00.450] thr=1   paramiko.transport: Kex agreed: ecdh-sha2-nistp256
+DEB [20170827-17:25:00.451] thr=1   paramiko.transport: HostKey agreed: ssh-rsa
+DEB [20170827-17:25:00.451] thr=1   paramiko.transport: Cipher agreed: aes128-ctr
+DEB [20170827-17:25:00.451] thr=1   paramiko.transport: MAC agreed: hmac-sha2-256
+DEB [20170827-17:25:00.452] thr=1   paramiko.transport: Compression agreed: none
+DEB [20170827-17:25:00.504] thr=1   paramiko.transport: kex engine KexNistp256 specified hash_algo <built-in function openssl_sha256>
+DEB [20170827-17:25:00.506] thr=1   paramiko.transport: Switch to new keys ...
+DEB [20170827-17:25:00.567] thr=1   paramiko.transport: Auth request (type=publickey) service=ssh-connection, username=robit
+INF [20170827-17:25:00.567] thr=1   paramiko.transport: Auth rejected (publickey).
+DEB [20170827-17:25:00.573] thr=1   paramiko.transport: Auth request (type=password) service=ssh-connection, username=robit
+ERR [20170827-17:25:00.573] thr=1   paramiko.transport: Unknown exception: global name 'username' is not defined
+ERR [20170827-17:25:00.577] thr=1   paramiko.transport: Traceback (most recent call last):
+ERR [20170827-17:25:00.577] thr=1   paramiko.transport:   File "/usr/local/lib/python2.7/site-packages/paramiko/transport.py", line 1860, in run
+ERR [20170827-17:25:00.577] thr=1   paramiko.transport:     handler(self.auth_handler, m)
+ERR [20170827-17:25:00.577] thr=1   paramiko.transport:   File "/usr/local/lib/python2.7/site-packages/paramiko/auth_handler.py", line 439, in _parse_userauth_request
+ERR [20170827-17:25:00.577] thr=1   paramiko.transport:     username, password)
+ERR [20170827-17:25:00.577] thr=1   paramiko.transport:   File "/Users/liqin/Desktop/git/SSH/server.py", line 35, in check_auth_password
+ERR [20170827-17:25:00.577] thr=1   paramiko.transport:     if(u == username and p == password):
+ERR [20170827-17:25:00.577] thr=1   paramiko.transport: NameError: global name 'username' is not defined
+ERR [20170827-17:25:00.577] thr=1   paramiko.transport: 
+DEB [20170827-17:28:14.027] thr=1   paramiko.transport: starting thread (server mode): 0x7040a50L
+DEB [20170827-17:28:14.027] thr=1   paramiko.transport: Local version/idstring: SSH-2.0-paramiko_2.2.1
+DEB [20170827-17:28:14.028] thr=1   paramiko.transport: Remote version/idstring: SSH-2.0-paramiko_2.2.1
+INF [20170827-17:28:14.028] thr=1   paramiko.transport: Connected (version 2.0, client paramiko_2.2.1)
+DEB [20170827-17:28:14.029] thr=1   paramiko.transport: kex algos:[u'ecdh-sha2-nistp256', u'ecdh-sha2-nistp384', u'ecdh-sha2-nistp521', u'diffie-hellman-group-exchange-sha256', u'diffie-hellman-group-exchange-sha1', u'diffie-hellman-group14-sha1', u'diffie-hellman-group1-sha1'] server key:[u'ssh-ed25519', u'ecdsa-sha2-nistp256', u'ecdsa-sha2-nistp384', u'ecdsa-sha2-nistp521', u'ssh-rsa', u'ssh-dss'] client encrypt:[u'aes128-ctr', u'aes192-ctr', u'aes256-ctr', u'aes128-cbc', u'aes192-cbc', u'aes256-cbc', u'blowfish-cbc', u'3des-cbc'] server encrypt:[u'aes128-ctr', u'aes192-ctr', u'aes256-ctr', u'aes128-cbc', u'aes192-cbc', u'aes256-cbc', u'blowfish-cbc', u'3des-cbc'] client mac:[u'hmac-sha2-256', u'hmac-sha2-512', u'hmac-sha1', u'hmac-md5', u'hmac-sha1-96', u'hmac-md5-96'] server mac:[u'hmac-sha2-256', u'hmac-sha2-512', u'hmac-sha1', u'hmac-md5', u'hmac-sha1-96', u'hmac-md5-96'] client compress:[u'none'] server compress:[u'none'] client lang:[u''] server lang:[u''] kex follows?False
+DEB [20170827-17:28:14.030] thr=1   paramiko.transport: Kex agreed: ecdh-sha2-nistp256
+DEB [20170827-17:28:14.030] thr=1   paramiko.transport: HostKey agreed: ssh-rsa
+DEB [20170827-17:28:14.030] thr=1   paramiko.transport: Cipher agreed: aes128-ctr
+DEB [20170827-17:28:14.030] thr=1   paramiko.transport: MAC agreed: hmac-sha2-256
+DEB [20170827-17:28:14.031] thr=1   paramiko.transport: Compression agreed: none
+DEB [20170827-17:28:14.082] thr=1   paramiko.transport: kex engine KexNistp256 specified hash_algo <built-in function openssl_sha256>
+DEB [20170827-17:28:14.084] thr=1   paramiko.transport: Switch to new keys ...
+DEB [20170827-17:28:14.106] thr=1   paramiko.transport: Auth request (type=publickey) service=ssh-connection, username=robit
+INF [20170827-17:28:14.107] thr=1   paramiko.transport: Auth rejected (publickey).
+DEB [20170827-17:28:14.113] thr=1   paramiko.transport: Auth request (type=password) service=ssh-connection, username=robit
+INF [20170827-17:28:14.113] thr=1   paramiko.transport: Auth granted (password).
+DEB [20170827-17:28:14.117] thr=1   paramiko.transport: [chan 0] Max packet in: 32768 bytes
+DEB [20170827-17:28:14.117] thr=1   paramiko.transport: [chan 0] Max packet out: 32768 bytes
+DEB [20170827-17:28:14.117] thr=1   paramiko.transport: Secsh channel 0 (session) opened.
+DEB [20170827-17:28:14.223] thr=1   paramiko.transport: EOF in transport thread
