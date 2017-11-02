@@ -4,13 +4,13 @@ import getopt
 import os
 import socket
 import argparse
+import subprocess
 
 paramiko.util.log_to_file('client.log')
 
 
-def ssh_client(username, host, port, keyfile, password):
+def ssh_client(username, host, port, key_filename, password):
 	
-	'''
 	try:
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sock.connect((host,port))
@@ -58,7 +58,9 @@ def ssh_client(username, host, port, keyfile, password):
 			print('[-] Authentication failed. :(')
 			t.close()
 			sys.exit(1)
-
+		else:
+			print('[+] Authenticated')
+			
 		chan = t.open_session()
 		chan.get_pty()
 		chan.invoke_shell()
@@ -68,32 +70,43 @@ def ssh_client(username, host, port, keyfile, password):
 		t.close()
 
 	except Exception as e:
-	    print '[+] Caught exception: ' + str(e.__class__) + ': ' + str(e)
+	    print '[-] Caught exception: ' + str(e.__class__) + ': ' + str(e)
 	    
 	    try:
 	        t.close()
 	    except:
 	        pass
 	    sys.exit(1)
-	'''
-
 	
-	try:
-		client = paramiko.SSHClient()
-		client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-		if keyfile == None or len(keyfile) == 0:
-			client.connect(host,port,username,password)
-		else:
-			key = paramiko.RSAKey.from_private_key_file(keyfile)
-			client.connect(host,port,username,pkey = keyfile)
-		ssh_session = client.get_transport().open_session()
-		if ssh_session.active:
-		    ssh_session.send('ClientConnected')
-		    print ssh_session.recv(1024)
 
-	except Exception as e:
-		print str(e)
-		sys.exit(1)
+	# while True:
+	# 	try:
+	# 		client = paramiko.SSHClient()
+	# 		client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+	# 		if keyfile == None or len(keyfile) == 0:
+	# 			client.connect(host,port,username,password)
+	# 		else:
+	# 			key = paramiko.RSAKey.from_private_key_file(keyfile)
+	# 			client.connect(host,port,username,pkey = keyfile)
+	# 		ssh_session = client.get_transport().open_session()
+	# 		if ssh_session.active:
+	# 		    ssh_session.send('ClientConnected')
+	# 		    print ssh_session.recv(1024)
+	# 		    while True:
+	# 		    	command = ssh_session.recv(1024)
+
+	# 		    	try:
+	# 		    		cmd_output = subprocess.check_output(command, shell=True)
+	# 		    		ssh_session.send(cmd_output)
+	# 		    	except Exception,e:
+	# 		    		ssh_session.send(str(e))
+	# 		    		client.close()
+
+	# 	except Exception as e:
+	# 		print str(e)
+	# 		sys.exit(1)
+
+	return
 
 def parse_options():
     parser = argparse.ArgumentParser(usage='%(prog)s <username>[@<host>] [-p port] [-i pubkey_path]',
@@ -119,8 +132,11 @@ if __name__ == "__main__":
 	args = parse_options()
 	username, host = args.username_host.split('@')
 	password = ''
+	
+
 	if args.keyfile == None:
 		password = raw_input('Password: ')
+
 	ssh_client(username, host, args.port, args.keyfile, password)
 
     
