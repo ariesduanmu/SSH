@@ -5,6 +5,7 @@ import os
 import socket
 import argparse
 import subprocess
+import interactive
 
 paramiko.util.log_to_file('client.log')
 
@@ -15,14 +16,14 @@ def ssh_client(username, host, port, key_filename, password):
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sock.connect((host,port))
 	except Exception as e:
-		print('[-] Connect failed: ' + str(e))
+		print(f'[-] Connect failed: {str(e)}')
 		sys.exit(1)
 	try:
 		t = paramiko.Transport(sock)
 		try:
 			t.start_client()
 		except paramiko.SSHException:
-			print "[-] SSH negotiation failed"
+			print("[-] SSH negotiation failed")
 			sys.exit(1)
 
 		try:
@@ -31,16 +32,16 @@ def ssh_client(username, host, port, key_filename, password):
 			try:
 				keys = paramiko.util.load_host_keys(os.path.expanduser('~/ssh/known_hosts'))
 			except IOError:
-				print '[-] Unable to open host keys file'
+				print('[-] Unable to open host keys file')
 				keys = {}
 
 		key = t.get_remote_server_key()
 		if host not in keys:
-			print '[*] WARNING: Unknown host key!'
+			print('[*] WARNING: Unknown host key!')
 		elif key.get_name() not in keys[host]:
-			print '[*] WARNING: Unknown host key!'
+			print('[*] WARNING: Unknown host key!')
 		elif keys[host][key.get_name()] != key:
-			print '[*] WARNING: Host key has changed!!!'
+			print('[*] WARNING: Host key has changed!!!')
 			sys.exit(1)
 		else:
 			print('[+] Host key OK.')
@@ -64,13 +65,13 @@ def ssh_client(username, host, port, key_filename, password):
 		chan = t.open_session()
 		chan.get_pty()
 		chan.invoke_shell()
-		print '[+] Here we go!\n'
+		print('[+] Here we go!\n')
 		interactive.interactive_shell(chan)
 		chan.close()
 		t.close()
 
 	except Exception as e:
-	    print '[-] Caught exception: ' + str(e.__class__) + ': ' + str(e)
+	    print('[-] Caught exception: ' + str(e.__class__) + ': ' + str(e))
 	    
 	    try:
 	        t.close()
@@ -115,9 +116,9 @@ def parse_options():
                                      epilog=
 '''
 Examples:
-python2.7 client.py username@host
-python2.7 client.py username@host -p port
-python2.7 client.py username@host -p port -i filename
+python client.py username@host
+python client.py username@host -p port
+python client.py username@host -p port -i filename
 
 '''
                                      )
@@ -135,7 +136,7 @@ if __name__ == "__main__":
 	
 
 	if args.keyfile == None:
-		password = raw_input('Password: ')
+		password = input('Password: ')
 
 	ssh_client(username, host, args.port, args.keyfile, password)
 

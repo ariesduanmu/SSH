@@ -25,8 +25,8 @@ def genrate_keys(private_outfile, public_outfile):
 
     public_key = private_key.public_key()
     public_pem = public_key.public_bytes(
-        encoding=serialization.Encoding.PEM,
-        format=serialization.PublicFormat.SubjectPublicKeyInfo
+        encoding=serialization.Encoding.OpenSSH,
+        format=serialization.PublicFormat.OpenSSH
         )
     write2file(public_outfile, public_pem)
 
@@ -41,15 +41,13 @@ def load_private_key(filepath):
 
 def load_public_key(filepath):
     with open(filepath, "rb") as key_file:
-        public_key = serialization.load_pem_public_key(
+        public_key = serialization.load_ssh_public_key(
             key_file.read(),
             backend=default_backend()
             )
     return public_key
 
-def encrypt_data(public_key):
-    message = 'the code must be like a piece of music'
-    print(len(message))
+def encrypt_data(message, public_key):
     message_bytes = bytes(message, encoding='utf8') if not isinstance(message, bytes) else message
     ciphertext = public_key.encrypt(
           message,
@@ -61,7 +59,4 @@ def encrypt_data(public_key):
     )
     ciphertext  = base64.b64encode(ciphertext)
     return ciphertext
-
-if __name__ == "__main__":
-    public_key = load_public_key("keys/rsa_pub.pem")
-    print(len(encrypt_data(public_key)))
+    
