@@ -7,9 +7,11 @@ try:
     import SocketServer
 except ImportError:
     import socketserver as SocketServer
+
 class ForwardServer(socketServer.ThreadingTCPServer):
 	daemon_threads = True
 	allow_reuse_address = True
+
 class Handler (SocketServer.BaseRequestHandler):
 	def handle(self):
 		chan = self.ssh_transport.open_channel('direct-tcpip',
@@ -43,6 +45,7 @@ def forward_tunnel(local_port, remote_host, remote_port, transport):
 
 def parse_options():
 	pass
+    
 if __name__ == '__main__':
 	server_host = sys.argv[1]
 	server_port = int(sys.argv[2])

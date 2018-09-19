@@ -78,34 +78,6 @@ def ssh_client(username, host, port, key_filename, password):
 	    except:
 	        pass
 	    sys.exit(1)
-	
-
-	# while True:
-	# 	try:
-	# 		client = paramiko.SSHClient()
-	# 		client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-	# 		if keyfile == None or len(keyfile) == 0:
-	# 			client.connect(host,port,username,password)
-	# 		else:
-	# 			key = paramiko.RSAKey.from_private_key_file(keyfile)
-	# 			client.connect(host,port,username,pkey = keyfile)
-	# 		ssh_session = client.get_transport().open_session()
-	# 		if ssh_session.active:
-	# 		    ssh_session.send('ClientConnected')
-	# 		    print ssh_session.recv(1024)
-	# 		    while True:
-	# 		    	command = ssh_session.recv(1024)
-
-	# 		    	try:
-	# 		    		cmd_output = subprocess.check_output(command, shell=True)
-	# 		    		ssh_session.send(cmd_output)
-	# 		    	except Exception,e:
-	# 		    		ssh_session.send(str(e))
-	# 		    		client.close()
-
-	# 	except Exception as e:
-	# 		print str(e)
-	# 		sys.exit(1)
 
 	return
 
