@@ -1,0 +1,20 @@
+DEB [20181009-11:16:28.797] thr=1   paramiko.transport: starting thread (client mode): 0xefa15a20
+DEB [20181009-11:16:28.798] thr=1   paramiko.transport: Local version/idstring: SSH-2.0-paramiko_2.4.1
+DEB [20181009-11:16:28.861] thr=1   paramiko.transport: Remote version/idstring: SSH-2.0-paramiko_2.4.1
+INF [20181009-11:16:28.862] thr=1   paramiko.transport: Connected (version 2.0, client paramiko_2.4.1)
+DEB [20181009-11:16:28.862] thr=1   paramiko.transport: kex algos:['gss-gex-sha1-toWM5Slw5Ew8Mqkay+al2g==', 'gss-group14-sha1-toWM5Slw5Ew8Mqkay+al2g==', 'gss-group1-sha1-toWM5Slw5Ew8Mqkay+al2g==', 'ecdh-sha2-nistp256', 'ecdh-sha2-nistp384', 'ecdh-sha2-nistp521', 'diffie-hellman-group14-sha1', 'diffie-hellman-group1-sha1'] server key:['ssh-rsa'] client encrypt:['aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', '3des-cbc'] server encrypt:['aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', '3des-cbc'] client mac:['hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1', 'hmac-md5', 'hmac-sha1-96', 'hmac-md5-96'] server mac:['hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1', 'hmac-md5', 'hmac-sha1-96', 'hmac-md5-96'] client compress:['none'] server compress:['none'] client lang:[''] server lang:[''] kex follows?False
+DEB [20181009-11:16:28.862] thr=1   paramiko.transport: Kex agreed: ecdh-sha2-nistp256
+DEB [20181009-11:16:28.863] thr=1   paramiko.transport: HostKey agreed: ssh-rsa
+DEB [20181009-11:16:28.863] thr=1   paramiko.transport: Cipher agreed: aes128-ctr
+DEB [20181009-11:16:28.863] thr=1   paramiko.transport: MAC agreed: hmac-sha2-256
+DEB [20181009-11:16:28.863] thr=1   paramiko.transport: Compression agreed: none
+DEB [20181009-11:16:28.902] thr=1   paramiko.transport: kex engine KexNistp256 specified hash_algo <built-in function openssl_sha256>
+DEB [20181009-11:16:28.902] thr=1   paramiko.transport: Switch to new keys ...
+DEB [20181009-11:16:28.905] thr=1   paramiko.transport: userauth is OK
+INF [20181009-11:16:28.905] thr=1   paramiko.transport: Authentication (password) successful!
+DEB [20181009-11:16:28.905] thr=2   paramiko.transport: [chan 0] Max packet in: 32768 bytes
+DEB [20181009-11:16:28.906] thr=1   paramiko.transport: [chan 0] Max packet out: 32768 bytes
+DEB [20181009-11:16:28.906] thr=1   paramiko.transport: Secsh channel 0 opened.
+DEB [20181009-11:16:28.907] thr=1   paramiko.transport: [chan 0] Sesch channel 0 request ok
+DEB [20181009-11:16:28.907] thr=1   paramiko.transport: [chan 0] Sesch channel 0 request ok
+ERR [20181009-11:17:11.854] thr=1   paramiko.transport: Socket exception: 远程主机强迫关闭了一个现有的连接。 (10054)

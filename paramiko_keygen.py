@@ -15,6 +15,6 @@ def load_public_key(public_key_path):
     return public_key.split(b" ")[1]
 
 if __name__ == "__main__":
-    private_outfile = "keys/host_rsa_key"
-    public_outfile = "keys/host_rsa_key.pub"
+    private_outfile = "ars_ssh/test_rsa.key"
+    public_outfile = "ars_ssh/test_rsa.pub"
     genrate_keys(private_outfile, public_outfile)
